@@ -8,5 +8,21 @@
 </head>
 <body>
     <%- include("partials/header.ejs") %>
+<div class="drivers">
+
+<% drivers.forEach(driver => { %>
+
+    <div class="drivers2">
+
+        <h1><%= driver.full_name %></h2>
+        <p><%= driver.team_name %></p>
+        <p>#<%= driver.driver_number %></p>
+        <img src="/images/drivers/<%= driver.driver_number %>.jpg" alt="<%= driver.full_name %>" >
+
+    </div>
+
+<% }) %>
+
+</div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 import express from "express";
+import axios from "axios";
 
 const app = express();
 const port = 3000;
@@ -12,8 +13,16 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/drivers",(req,res)=>{
-    res.render("drivers.ejs");
+app.get("/drivers",async (req,res)=>{
+    try{
+        const result = await axios.get("https://api.openf1.org/v1/drivers?session_key=latest");
+        const drivers = result.data;
+        res.render("drivers.ejs",{drivers:drivers});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).send("Failed to fetch the drivers data")
+    }
 })
 
 app.get("/teams",(req,res)=>{

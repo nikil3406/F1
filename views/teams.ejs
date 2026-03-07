@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1-Teams</title>
     <link rel="stylesheet" href="css/dash-board.css">
+    <link rel="stylesheet" href="css/teams.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
+    <div class="teams">
+        <% teams.forEach(team => { %>
+            <div class="teams2">
+                <%= team %>
+                <div class="driver">
+                    <% drivers.forEach(driver => { %>
+                        <% if (driver.team_name == team) { %>
+                            <%= driver.full_name %>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <% } %>
+                    <% }) %>
+                </div>
+                <img src="images/teams/<%= team%>.jpg" alt="<%= team %>">
+            </div>
+        <% }); %>
+    </div>
 </body>
 </html>

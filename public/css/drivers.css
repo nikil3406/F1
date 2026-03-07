@@ -1,0 +1,34 @@
+.drivers{
+    background: linear-gradient(to right,#8f1616,#400707);
+    padding: 20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+    gap:15px;
+}
+
+.drivers2{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    color: white;
+    overflow:hidden;
+    text-align:center;
+    background:#160e0b;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0px 4px 20px rgba(0,0,0,1);
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.drivers2 img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    object-position:top;
+    border-radius: 10px;
+}

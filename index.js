@@ -3,6 +3,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
+const teams = [];
 
 app.set("view engine", "ejs");
 
@@ -25,8 +26,22 @@ app.get("/drivers",async (req,res)=>{
     }
 })
 
-app.get("/teams",(req,res)=>{
-    res.render("teams.ejs");
+app.get("/teams",async (req,res)=>{
+    try{
+        const result = await axios.get("https://api.openf1.org/v1/drivers?session_key=latest");
+        const drivers = result.data;
+        for(let i = 0; i < drivers.length; i++){
+
+            if(!teams.includes(drivers[i].team_name)){
+                teams.push(drivers[i].team_name);
+            }
+        }
+        res.render("teams.ejs",{teams:teams,drivers:drivers});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).send("Failed to fetch the teams data");
+    }
 })
 
 app.get("/schedule",(req,res)=>{

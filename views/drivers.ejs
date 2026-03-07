@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1-Drivers</title>
     <link rel="stylesheet" href="css/dash-board.css">
+    <link rel="stylesheet" href="css/drivers.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
@@ -13,10 +14,11 @@
 <% drivers.forEach(driver => { %>
 
     <div class="drivers2">
-
+        <div class="details">
         <h1><%= driver.full_name %></h2>
-        <p><%= driver.team_name %></p>
-        <p>#<%= driver.driver_number %></p>
+        <h2><%= driver.team_name %></h2>
+        <h2>#<%= driver.driver_number %></h2>
+        </div>
         <img src="/images/drivers/<%= driver.driver_number %>.jpg" alt="<%= driver.full_name %>" >
 
     </div>

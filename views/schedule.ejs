@@ -5,8 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1-Schedule</title>
     <link rel="stylesheet" href="css/dash-board.css">
+    <link rel="stylesheet" href="css/schedule.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
+    <div class="schedule">
+        <% for( let i = 0; i < schedule.length; i++ ) { %>
+            <div class="schedule2">
+                <div class="driv">
+                    <h3>Round:<%= i+1 %></h3>
+                    <h1><%= schedule[i] %></h1>
+                    <p><%= location[i] %></p><br><br><br><br>
+                    <p><%= date[i] %></p>
+                </div>
+                <img src="images/circuits/<%= schedule[i] %>.webp" alt="">
+            </div>
+        <% } %>
+    </div>
 </body>
 </html>

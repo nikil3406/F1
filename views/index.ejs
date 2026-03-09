@@ -5,8 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1</title>
     <link rel="stylesheet" href="css/dash-board.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
     <%- include("partials/header.ejs") %>
+    <div class="table">
+        <div class="row head">
+            <div class="position">Pos</div>
+            <div class="name">Driver</div>
+            <div>Nationality</div>
+            <div class="team">Team</div>
+            <div class="points">Points</div>
+        </div>
+        <hr>
+        <% rank.forEach(rank => { %>            
+            <div class="row">
+                <div class="position"><%= rank.position %></div>
+                <div class="name"><%= rank.Driver.givenName %> <%= rank.Driver.familyName %></div>
+                <div class="nation"><%= rank.Driver.nationality %></div>
+                <div class="team"><%= rank.Constructors[0].name %></div>
+                <div class="points"><%= rank.points %></div>
+            </div>
+        <%}); %>
+    </div>
 </body>
 </html>

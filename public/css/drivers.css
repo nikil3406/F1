@@ -1,5 +1,5 @@
 .drivers{
-    background: linear-gradient(to right,#8f1616,#400707);
+    background: linear-gradient(to right,#060b33,#400707);
     padding: 20px;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
@@ -27,7 +27,7 @@
 
 .drivers2 img{
     width:50%;
-    height:300px;
+    height:250px;
     object-fit:cover;
     object-position:top;
     border-radius: 50%;

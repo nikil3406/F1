@@ -13,8 +13,18 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.render("index");
+app.get("/", async (req, res) => {
+    try{
+        const result = await axios.get("https://api.jolpi.ca/ergast/f1/current/driverStandings");
+        const rank = result.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+        console.log(rank);
+        res.render("index",{rank:rank});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).send("Failed to fetch the current standings");
+    }
+    
 });
 
 app.get("/drivers",async (req,res)=>{

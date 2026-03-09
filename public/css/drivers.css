@@ -1,5 +1,5 @@
 .drivers{
-    background: linear-gradient(to right,#060b33,#400707);
+    background: linear-gradient(to right,#0c1b8b,#730b0b);
     padding: 20px;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px,1fr));

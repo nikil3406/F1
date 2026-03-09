@@ -28,5 +28,33 @@
             </div>
         <%}); %>
     </div>
+
+    <div class="schedule">
+        <% for( let i = 0; i < schedule.length; i++ ) { %>
+            <div class="schedule2">
+                <div class="driv">
+                    <h3>Round:<%= i+1 %></h3>
+                    <h1><%= schedule[i] %></h1>
+                    <p><%= location[i] %></p><br><br><br><br>
+                    <p><%= date[i] %></p>
+                </div>
+                <div class="result">
+
+                <% if(raceResults[i]) { %>
+                    <% raceResults[i].results.slice(0,3).forEach(driver => { %>
+                        <div class="single">
+                            <%= driver.position %> -
+                            <%= driver.Driver.givenName %> <%= driver.Driver.familyName %>
+                            (<%= driver.Constructor.name %>)
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>Race not completed</p>
+                <% } %>
+                </div>
+                <img src="images/circuits/<%= schedule[i] %>.webp" alt="">
+            </div>
+        <% } %>
+    </div>
 </body>
 </html>

@@ -1,46 +1,130 @@
 *{
-    margin: 0px;
-    padding: 0px;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-    background: linear-gradient(to right,#060b33,#400707);
+    background: linear-gradient(to right,#0c1b8b,#730b0b);
     font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(14px,1.2vw,18px);
 }
-.table{ 
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background-color: black;
+
+/* ---------------- STANDINGS TABLE ---------------- */
+
+.table{
+    display:flex;
+    flex-direction:column;
+    color:white;
+    background:black;
     width:80%;
     margin:40px auto;
-    border-radius: 10px;
-    text-align: center;
+    border-radius:10px;
+    text-align:center;
+    overflow-x:auto;
 }
 
 .row{
     display:grid;
-    grid-template-columns: 70px 1fr 120px 1fr 80px;
-    padding:10px;
+    grid-template-columns:70px 1fr 120px 1fr 80px;
+    padding:12px;
     border-bottom:1px solid #333;
-    color:white;
 }
 
 .head{
     font-weight:bold;
-    color: black;
+    color:black;
     background:#e10600;
-    border-radius: 10px;
+    border-radius:10px 10px 0 0;
 }
 
+/* ---------------- SCHEDULE GRID ---------------- */
+
+.schedule{
+    background: linear-gradient(to right,#060b33,#400707);
+    padding:20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
+    gap:15px;
+}
+
+.schedule2{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    gap:20px;
+    color:white;
+    overflow:hidden;
+    background:#160e0b;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 4px 20px rgba(0,0,0,1);
+}
+
+/* ---------------- DRIVER INFO ---------------- */
+
+.driv{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+/* ---------------- CIRCUIT IMAGE ---------------- */
+
+.schedule2 img{
+    width:100%;
+    max-width:350px;
+    height:200px;
+    object-fit:cover;
+    object-position:top;
+    border-radius:10px;
+}
+
+/* ---------------- RESULTS ---------------- */
+
+.result{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.single{
+    width:100%;
+    background:#333;
+    border-radius:10px;
+    padding:10px;
+}
+
+/* ---------------- MOBILE RESPONSIVENESS ---------------- */
+
+@media (max-width:800px){
+
+.schedule2{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.schedule2 img{
+    width:100%;
+    height:auto;
+}
+
+}
+
+/* ---------------- SMALL PHONE TABLE FIX ---------------- */
 
 @media (max-width:600px){
-    .row{
-        grid-template-columns: 50px 1fr;
-        grid-template-rows: auto auto;
-    }
 
-    .team, .points{
-        grid-column: span 2;
-    }
+.row{
+    grid-template-columns:50px 1fr;
+    grid-template-rows:auto auto auto;
+}
+
+.nation,
+.team,
+.points{
+    grid-column:span 2;
+}
+
 }

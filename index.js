@@ -17,8 +17,38 @@ app.get("/", async (req, res) => {
     try{
         const result = await axios.get("https://api.jolpi.ca/ergast/f1/current/driverStandings");
         const rank = result.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-        console.log(rank);
-        res.render("index",{rank:rank});
+        const result2 = await axios.get("https://api.openf1.org/v1/sessions?session_key=latest");
+        const schedules = result2.data;
+        for(let i = 0; i < schedules.length; i++){
+
+            if(!schedule.includes(schedules[i].country_name)){
+                schedule.push(schedules[i].country_name);
+                location.push(schedules[i].location);
+                date.push(schedules[i].date_start.split("T")[0]);
+            }
+        }
+        const raceResults = [];
+        for(let i = 1; i <= 24; i++){
+            try{
+            const response = await axios.get(
+                `https://api.jolpi.ca/ergast/f1/current/${i}/results`);
+
+            const race = response.data.MRData.RaceTable.Races[0];
+
+            if(race){
+                raceResults.push({
+                    round: race.round,
+                    raceName: race.raceName,
+                    results: race.Results
+                });
+            }
+            }
+            catch(error){
+                break;
+            }
+
+        }
+        res.render("index",{rank:rank,schedule:schedule,location:location,date:date,raceResults:raceResults});
     }
     catch(error){
         console.log(error);

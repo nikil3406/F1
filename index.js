@@ -48,7 +48,9 @@ app.get("/", async (req, res) => {
             }
 
         }
-        res.render("index",{rank:rank,schedule:schedule,location:location,date:date,raceResults:raceResults});
+        const news = await axios.get(`https://newsapi.org/v2/everything?q=formula%201&language=en&sortBy=publishedAt&apiKey=dc98214e11e3450699518ae40198826a`);
+        const articles = news.data.articles.slice(0,5);
+        res.render("index",{rank:rank,schedule:schedule,location:location,date:date,raceResults:raceResults,articles:articles});
     }
     catch(error){
         console.log(error);

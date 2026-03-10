@@ -16,6 +16,26 @@ function toggleMenu(){
 </script>
 <body>
     <%- include("partials/header.ejs") %>
+    <div class="news">
+
+        <% articles.forEach(article => { %>
+
+            <div class="news-card">
+
+            <img src="<%= article.urlToImage %>" alt="news">
+
+            <div class="news-text">
+            <h3><%= article.title %></h3>
+            <p><%= article.source.name %></p>
+            <a href="<%= article.url %>" target="_blank">Read More</a>
+            </div>
+
+            </div>
+
+        <% }) %>
+
+    </div><br><br>
+    <h1 style="color: white; text-align: center;">2026 DRIVERS STANDING:</h1>
     <div class="table">
         <div class="row head">
             <div class="position">Pos</div>
@@ -34,8 +54,8 @@ function toggleMenu(){
                 <div class="points"><%= rank.points %></div>
             </div>
         <%}); %>
-    </div>
-
+    </div><br><br>
+    <h1 style="color: white; text-align: center;"> 2026 RACE RESULTS:</h1>
     <div class="schedule">
         <% for( let i = 0; i < schedule.length; i++ ) { %>
             <div class="schedule2">
@@ -49,7 +69,7 @@ function toggleMenu(){
 
                 <% if(raceResults[i]) { %>
                     <% raceResults[i].results.slice(0,3).forEach(driver => { %>
-                        <div class="single">
+                        <div class="single pos<%=i+1%>">
                             <%= driver.position %> -
                             <%= driver.Driver.givenName %> <%= driver.Driver.familyName %>
                             (<%= driver.Constructor.name %>)
@@ -59,7 +79,6 @@ function toggleMenu(){
                     <p>Race not completed</p>
                 <% } %>
                 </div>
-                <img src="images/circuits/<%= schedule[i] %>.webp" alt="">
             </div>
         <% } %>
     </div>

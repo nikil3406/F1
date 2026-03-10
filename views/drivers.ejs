@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/drivers.css">
 </head>
+<script>
+function toggleMenu(){
+    const menu = document.getElementById("navMenu");
+    menu.classList.toggle("show");
+}
+</script>
 <body>
     <%- include("partials/header.ejs") %>
 <div class="drivers">
@@ -15,7 +21,7 @@
 
     <div class="drivers2">
         <div class="details">
-        <h1><%= driver.full_name %></h2>
+        <h1><%= driver.full_name %></h1>
         <h2><%= driver.team_name %></h2>
         <h2>#<%= driver.driver_number %></h2>
         </div>

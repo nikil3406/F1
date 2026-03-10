@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/schedule.css">
 </head>
+<script>
+function toggleMenu(){
+    const menu = document.getElementById("navMenu");
+    menu.classList.toggle("show");
+}
+</script>
 <body>
     <%- include("partials/header.ejs") %>
     <div class="schedule">

@@ -31,3 +31,41 @@
     object-fit:cover;
     border-radius: 10px;
 }
+
+
+@media (max-width:900px){
+
+.schedule{
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+}
+
+.schedule2{
+    flex-direction:column;
+    text-align:center;
+}
+
+.schedule2 img{
+    width:100%;
+    height:auto;
+}
+
+}
+
+/* -------- MOBILE -------- */
+
+@media (max-width:500px){
+
+.schedule{
+    grid-template-columns:1fr;
+}
+
+.schedule2{
+    padding:15px;
+}
+
+.schedule2 img{
+    width:100%;
+    height:auto;
+}
+
+}

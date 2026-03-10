@@ -28,3 +28,34 @@
     object-position:top;
     border-radius: 15px;
 }
+
+
+@media (max-width:900px){
+
+.teams{
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+
+.teams2 img{
+    height:200px;
+}
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width:500px){
+
+.teams{
+    grid-template-columns:1fr;
+}
+
+.teams2{
+    padding:15px;
+}
+
+.teams2 img{
+    height:180px;
+}
+
+}

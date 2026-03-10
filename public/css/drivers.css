@@ -1,34 +1,83 @@
 .drivers{
     background: linear-gradient(to right,#0c1b8b,#730b0b);
-    padding: 20px;
+    padding:20px;
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
     gap:15px;
 }
 
 .drivers2{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    color: white;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:center;
+    gap:20px;
+    color:white;
     overflow:hidden;
-    text-align:center;
     background:#160e0b;
     border-radius:15px;
     padding:20px;
-    box-shadow:0px 4px 20px rgba(0,0,0,1);
+    box-shadow:0 4px 20px rgba(0,0,0,1);
 }
 
 .details{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 .drivers2 img{
-    width:50%;
-    height:250px;
+    width:180px;
+    height:180px;
     object-fit:cover;
     object-position:top;
-    border-radius: 50%;
+    border-radius:50%;
+}
+
+/* -------- TABLET -------- */
+
+@media (max-width:900px){
+
+.drivers{
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+}
+
+.drivers2{
+    flex-direction:column;
+    text-align:center;
+}
+
+.drivers2 img{
+    width:150px;
+    height:150px;
+}
+
+}
+
+/* -------- MOBILE -------- */
+
+@media (max-width:500px){
+
+.drivers{
+    grid-template-columns:1fr;
+}
+
+.drivers2{
+    flex-direction:column;
+    text-align:center;
+}
+
+.drivers2 img{
+    width:120px;
+    height:120px;
+}
+
+.details h1{
+    font-size:20px;
+}
+
+.details h2{
+    font-size:16px;
+}
+
 }

@@ -1,8 +1,10 @@
 import express from "express";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const teams = [];
 const schedule = [];
 const location = [];
@@ -45,10 +47,10 @@ app.get("/", async (req, res) => {
             }
             catch(error){
                 break;
-            }
+        }
 
         }
-        const news = await axios.get(`https://newsapi.org/v2/everything?q=formula%201&language=en&sortBy=publishedAt&apiKey=dc98214e11e3450699518ae40198826a`);
+        const news = await axios.get(`https://newsapi.org/v2/everything?q=formula%201&language=en&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`);
         const articles = news.data.articles.slice(0,5);
         res.render("index",{rank:rank,schedule:schedule,location:location,date:date,raceResults:raceResults,articles:articles});
     }
@@ -114,5 +116,5 @@ app.get("/home",(req,res)=>{
     res.redirect("/");
 })
 app.listen(port, () => {
-    console.log(`Port open at ${port}`);
+    console.log(`Server running on port ${port}`);
 });

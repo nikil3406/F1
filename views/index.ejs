@@ -58,12 +58,13 @@ function toggleMenu(){
     <h1 style="color: white; text-align: center;"> 2026 RACE RESULTS:</h1>
     <div class="schedule">
         <% for( let i = 0; i < schedule.length; i++ ) { %>
+            <% if(!raceResults[i]) break;%>
             <div class="schedule2">
                 <div class="driv">
                     <h3>Round:<%= i+1 %></h3>
-                    <h1><%= schedule[i] %></h1>
-                    <p><%= location[i] %></p><br><br><br><br>
-                    <p><%= date[i] %></p>
+                    <h1><%= schedule[i+1] %></h1>
+                    <p><%= location[i+1] %></p><br><br><br><br>
+                    <p><%= date[i+1] %></p>
                 </div>
                 <div class="result">
 
@@ -76,8 +77,9 @@ function toggleMenu(){
                         </div>
                     <% }) %>
                 <% } else { %>
-                    <p>Race not completed</p>
+                    <% break %>
                 <% } %>
+                
                 </div>
             </div>
         <% } %>

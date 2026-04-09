@@ -17,7 +17,7 @@ app.get("/", async (req, res) => {
     try{
         const result = await axios.get("https://api.jolpi.ca/ergast/f1/current/driverStandings");
         const rank = result.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-        const result2 = await axios.get("https://api.openf1.org/v1/sessions?session_key=latest");
+        const result2 = await axios.get("https://api.openf1.org/v1/sessions?year=2026");
         const schedules = result2.data;
         for(let i = 0; i < schedules.length; i++){
 

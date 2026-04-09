@@ -2,7 +2,7 @@
 
 A modern web application displaying real-time **Formula 1** data: driver standings, team info, 2026 race schedule, news, and past results. Built with Node.js, Express, and EJS. Fetches live data from official F1 APIs.
 
-![Home Dashboard](https://via.placeholder.com/1200x600/1e3a8a/ffffff?text=F1+Home+Dashboard+%F0%9F%9A%97) *(Run locally to view live)*
+ 
 
 ## ✨ Features
 - **Home (/)**: Current driver standings, upcoming races (2026 schedule), recent race results, top 5 F1 news articles.
@@ -75,7 +75,6 @@ f1-website/
 - Hide API key: Create `.env` with `NEWS_API_KEY=yourkey`, use `dotenv`.
 
 ## 📈 Future Improvements (Todo)
-- Rename project from "weather" to "f1-dashboard".
 - Add search/filter on pages.
 - Historical data cache.
 - Authentication for custom API keys.
@@ -88,7 +87,7 @@ f1-website/
 4. Push/PR.
 
 ## 📄 License
-MIT License – See [LICENSE](LICENSE) *(add if needed)*.
+MIT License – See [LICENSE](LICENSE) 
 
 **Made with ❤️ for F1 fans! Report issues or suggest features.**
 

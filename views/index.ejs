@@ -3,87 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1</title>
+    <title>F1 Dashboard | Home</title>
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
-<script>
-function toggleMenu(){
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("show");
-}
-</script>
 <body>
+    <script>
+    function toggleMenu(){
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("show");
+    }
+    </script>
+
     <%- include("partials/header.ejs") %>
-    <div class="news">
 
-        <% articles.forEach(article => { %>
-
-            <div class="news-card">
-
-            <img src="<%= article.urlToImage %>" alt="news">
-
-            <div class="news-text">
-            <h3><%= article.title %></h3>
-            <p><%= article.source.name %></p>
-            <a href="<%= article.url %>" target="_blank">Read More</a>
+    <main class="section-container">
+        <% if (locals.error) { %>
+            <div class="glass error-banner" style="padding: 20px; color: var(--f1-red); margin-bottom: 30px; text-align: center;">
+                <p><%= error %></p>
             </div>
+        <% } %>
 
+        <!-- News Section -->
+        <section class="home-section">
+            <div class="section-header">
+                <h2 class="f1-title">Latest F1 News</h2>
+                <div class="title-accent"></div>
             </div>
-
-        <% }) %>
-
-    </div><br><br>
-    <h1 style="color: white; text-align: center;">2026 DRIVERS STANDING:</h1>
-    <div class="table">
-        <div class="row head">
-            <div class="position">Pos</div>
-            <div class="name">Driver</div>
-            <div>Nationality</div>
-            <div class="team">Team</div>
-            <div class="points">Points</div>
-        </div>
-        <hr>
-        <% rank.forEach(rank => { %>            
-            <div class="row">
-                <div class="position"><%= rank.position %></div>
-                <div class="name"><%= rank.Driver.givenName %> <%= rank.Driver.familyName %></div>
-                <div class="nation"><%= rank.Driver.nationality %></div>
-                <div class="team"><%= rank.Constructors[0].name %></div>
-                <div class="points"><%= rank.points %></div>
-            </div>
-        <%}); %>
-    </div><br><br>
-    <h1 style="color: white; text-align: center;"> 2026 RACE RESULTS:</h1>
-    <div class="schedule">
-        <% for( let i = 0; i < schedule.length; i++ ) { %>
-            <% if(!raceResults[i]) break;%>
-            <div class="schedule2">
-                <div class="driv">
-                    <h3>Round:<%= i+1 %></h3>
-                    <h1><%= schedule[i+1] %></h1>
-                    <p><%= location[i+1] %></p><br><br><br><br>
-                    <p><%= date[i+1] %></p>
-                </div>
-                <div class="result">
-
-                <% if(raceResults[i]) { %>
-                    <% raceResults[i].results.slice(0,3).forEach(driver => { %>
-                        <div class="single pos<%=i+1%>">
-                            <%= driver.position %> -
-                            <%= driver.Driver.givenName %> <%= driver.Driver.familyName %>
-                            (<%= driver.Constructor.name %>)
+            
+            <div class="news-grid">
+                <% if (articles && articles.length > 0) { %>
+                    <% articles.forEach(article => { %>
+                        <div class="news-card glass">
+                            <div class="card-img">
+                                <img src="<%= article.urlToImage || '/images/news-placeholder.jpg' %>" alt="News Image">
+                            </div>
+                            <div class="card-content">
+                                <span class="news-source"><%= article.source.name %></span>
+                                <h3><%= article.title %></h3>
+                                <a href="<%= article.url %>" target="_blank" class="read-link">Read Story →</a>
+                            </div>
                         </div>
                     <% }) %>
                 <% } else { %>
-                    <% break %>
+                    <p class="empty-msg">No news articles found at the moment.</p>
                 <% } %>
-                
-                </div>
             </div>
-        <% } %>
-    </div>
+        </section>
+
+        <!-- Standings Section -->
+        <section class="home-section">
+            <div class="section-header">
+                <h2 class="f1-title">2026 Driver Standings</h2>
+                <div class="title-accent"></div>
+            </div>
+
+            <div class="standings-table-wrapper glass">
+                <table class="standings-table">
+                    <thead>
+                        <tr>
+                            <th class="pos">Pos</th>
+                            <th>Driver</th>
+                            <th class="hide-mobile">Nationality</th>
+                            <th>Team</th>
+                            <th class="pts">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (rank && rank.length > 0) { %>
+                            <% rank.forEach(r => { %>            
+                                <tr>
+                                    <td class="pos"><span><%= r.position %></span></td>
+                                    <td class="driver-name"><%= r.Driver.givenName %> <%= r.Driver.familyName %></td>
+                                    <td class="hide-mobile"><%= r.Driver.nationality %></td>
+                                    <td class="team-name"><%= r.Constructors[0].name %></td>
+                                    <td class="pts"><%= r.points %></td>
+                                </tr>
+                            <%}); %>
+                        <% } else { %>
+                            <tr><td colspan="5" class="empty-msg">Standings data currently unavailable.</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Race Results Section -->
+        <section class="home-section">
+            <div class="section-header">
+                <h2 class="f1-title">Recent Race Results</h2>
+                <div class="title-accent"></div>
+            </div>
+
+            <div class="results-grid">
+                <% if (raceResults && raceResults.length > 0) { %>
+                    <% raceResults.forEach((race, i) => { %>
+                        <div class="result-card glass">
+                            <div class="result-header">
+                                <span class="round-badge">Round <%= race.round %></span>
+                                <h3><%= race.raceName %></h3>
+                            </div>
+                            <div class="podium-list">
+                                <% if(race.results) { %>
+                                    <% race.results.slice(0,3).forEach(driver => { %>
+                                        <div class="podium-item pos-<%= driver.position %>">
+                                            <span class="rank-num"><%= driver.position %></span>
+                                            <div class="driver-info">
+                                                <p class="name"><%= driver.Driver.givenName %> <%= driver.Driver.familyName %></p>
+                                                <p class="team"><%= driver.Constructor.name %></p>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p class="empty-msg">Race results data currently unavailable.</p>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
     <%- include("partials/footer.ejs") %>
 </body>
 </html>

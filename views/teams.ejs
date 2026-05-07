@@ -3,34 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1-Teams</title>
+    <title>F1 Dashboard | Teams</title>
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/teams.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
-<script>
-function toggleMenu(){
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("show");
-}
-</script>
 <body>
+    <script>
+    function toggleMenu(){
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("show");
+    }
+    </script>
     <%- include("partials/header.ejs") %>
-    <div class="teams">
-        <% teams.forEach(team => { %>
-            <div class="teams2">
-                <h1><%= team %></h1>
-                <div class="driver">
-                    <% drivers.forEach(driver => { %>
-                        <% if (driver.team_name == team) { %>
-                            <%= driver.full_name %>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <% } %>
-                    <% }) %>
-                </div>
-                <img src="images/teams/<%= team%>.jpg" alt="<%= team %>">
-            </div>
-        <% }); %>
-    </div>
+
+    <main class="section-container">
+        <div class="section-header">
+            <h1 class="f1-title">Constructor Teams</h1>
+            <div class="title-accent"></div>
+        </div>
+
+        <div class="teams-grid">
+            <% if (teams && teams.length > 0) { %>
+                <% teams.forEach(team => { %>
+                    <div class="team-card glass">
+                        <div class="team-header">
+                            <h2><%= team %></h2>
+                            <div class="team-drivers">
+                                <% drivers.forEach(driver => { %>
+                                    <% if (driver.team_name == team) { %>
+                                        <span class="driver-tag"><%= driver.full_name %></span>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <div class="team-image">
+                            <img src="/images/teams/<%= team %>.jpg" alt="<%= team %> Car" onerror="this.src='/images/team-placeholder.jpg'">
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="empty-msg">Team data is currently unavailable.</p>
+            <% } %>
+        </div>
+    </main>
+
     <%- include("partials/footer.ejs") %>
 </body>
 </html>

@@ -3,32 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1-Schedule</title>
+    <title>F1 Dashboard | Schedule</title>
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/schedule.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
-<script>
-function toggleMenu(){
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("show");
-}
-</script>
 <body>
+    <script>
+    function toggleMenu(){
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("show");
+    }
+    </script>
     <%- include("partials/header.ejs") %>
-    <div class="schedule">
-        <% for( let i = 0; i < schedule.length; i++ ) { %>
-            <div class="schedule2">
-                <div class="driv">
-                    <h3>Round:<%= i+1 %></h3>
-                    <h1><%= schedule[i] %></h1>
-                    <p><%= location[i] %></p><br><br><br><br>
-                    <p><%= date[i] %></p>
-                </div>
-                <img src="images/circuits/<%= schedule[i] %>.webp" alt="">
-            </div>
-        <% } %>
-    </div>
+
+    <main class="section-container">
+        <div class="section-header">
+            <h1 class="f1-title">2026 Race Calendar</h1>
+            <div class="title-accent"></div>
+        </div>
+
+        <div class="schedule-timeline">
+            <% if (schedule && schedule.length > 0) { %>
+                <% for( let i = 0; i < schedule.length; i++ ) { %>
+                    <div class="race-card glass">
+                        <div class="race-info">
+                            <span class="round-number">Round <%= i+1 %></span>
+                            <h2><%= schedule[i] %></h2>
+                            <p class="race-location"><%= location[i] %></p>
+                            <div class="race-date">
+                                <span class="calendar-icon">📅</span>
+                                <%= date[i] %>
+                            </div>
+                        </div>
+                        <div class="circuit-map">
+                            <img src="/images/circuits/<%= schedule[i] %>.webp" alt="<%= schedule[i] %> Circuit" onerror="this.src='/images/circuit-placeholder.jpg'">
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p class="empty-msg">Schedule data is currently unavailable.</p>
+            <% } %>
+        </div>
+    </main>
+
     <%- include("partials/footer.ejs") %>
 </body>
 </html>

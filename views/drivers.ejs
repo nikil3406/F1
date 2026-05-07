@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1-Drivers</title>
+    <title>F1 Dashboard | Drivers</title>
     <link rel="stylesheet" href="css/dash-board.css">
     <link rel="stylesheet" href="css/drivers.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
-<script>
-function toggleMenu(){
-    const menu = document.getElementById("navMenu");
-    menu.classList.toggle("show");
-}
-</script>
 <body>
+    <script>
+    function toggleMenu(){
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("show");
+    }
+    </script>
     <%- include("partials/header.ejs") %>
-<div class="drivers">
 
-<% drivers.forEach(driver => { %>
-
-    <div class="drivers2">
-        <div class="details">
-        <h1><%= driver.full_name %></h1>
-        <h2><%= driver.team_name %></h2>
-        <h2>#<%= driver.driver_number %></h2>
+    <main class="section-container">
+        <div class="section-header">
+            <h1 class="f1-title">F1 Drivers</h1>
+            <div class="title-accent"></div>
         </div>
-        <img src="/images/drivers/<%= driver.driver_number %>.jpg" alt="<%= driver.full_name %>" >
 
-    </div>
+        <div class="drivers-grid">
+            <% if (drivers && drivers.length > 0) { %>
+                <% drivers.forEach(driver => { %>
+                    <div class="driver-card glass">
+                        <div class="driver-image">
+                            <img src="/images/drivers/<%= driver.driver_number %>.jpg" alt="<%= driver.full_name %>" onerror="this.src='/images/driver-placeholder.jpg'">
+                            <span class="driver-number">#<%= driver.driver_number %></span>
+                        </div>
+                        <div class="driver-details">
+                            <p class="team-name"><%= driver.team_name %></p>
+                            <h3><%= driver.full_name %></h3>
+                            <div class="driver-meta">
+                                <span class="country-badge"><%= driver.country_code || 'F1' %></span>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p class="empty-msg">Driver data is currently unavailable.</p>
+            <% } %>
+        </div>
+    </main>
 
-<% }) %>
-
-</div>
-<%- include("partials/footer.ejs") %>
+    <%- include("partials/footer.ejs") %>
 </body>
 </html>
